@@ -32,7 +32,7 @@ export default function Header() {
   };
 
   return (
-    <header className={`absolute top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300 ${isScrolled ? 'bg-accent shadow-md' : 'bg-accent/95 backdrop-blur-sm'
+    <header className={`absolute top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300'
       }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 lg:h-20">
@@ -40,7 +40,7 @@ export default function Header() {
           <div className="flex items-center">
             <a href="#home" onClick={(e) => { e.preventDefault(); handleNavClick('#home'); }} className="flex items-center space-x-3">
               <img src={"/icon.png"} alt="Life Simple" className="h-20 lg:h-20 w-auto" />
-              <span className="text-xl lg:text-2xl text-white" style={{fontFamily: 'Inter', fontWeight: '300'}}>Life Simple</span>
+              <span className="text-xl lg:text-2xl text-white" style={{ fontFamily: 'Inter', fontWeight: '300' }}>Life Simple</span>
             </a>
           </div>
 
@@ -70,14 +70,14 @@ export default function Header() {
                 size="icon"
                 onClick={() => window.open(`https://wa.me/${WHATSAPP_NUMBER}`, '_blank')}
               >
-                <MessageCircle className="h-5 w-5 text-red hover:text-red" />
+                <MessageCircle className="h-5 w-5 text-white" />
               </Button>
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => window.open(INSTAGRAM_URL, '_blank')}
               >
-                <Instagram className="h-5 w-5" />
+                <Instagram className="h-5 w-5 text-white" />
               </Button>
             </div>
 

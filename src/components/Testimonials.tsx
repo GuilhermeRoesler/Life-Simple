@@ -42,7 +42,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section id="depoimentos" className="py-12 bg-accent px-12">
+    <section id="depoimentos" className="py-12 bg-accent md:px-12">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 animate-fade-in">
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">

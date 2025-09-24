@@ -22,14 +22,14 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.consentimento) {
       setSubmitMessage('Por favor, aceite os termos de consentimento.');
       return;
     }
 
     setIsSubmitting(true);
-    
+
     try {
       // Placeholder API call
       // const response = await fetch('/api/contact', {
@@ -61,7 +61,7 @@ export default function Contact() {
 
   return (
     <section id="contato" className="py-12 bg-background">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 md:px-12">
         <div className="text-center mb-12 animate-fade-in">
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
             Entre em Contato
@@ -73,7 +73,7 @@ export default function Contact() {
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Contact Form */}
-          <div className="animate-slide-up">
+          <div className="animate-slide-up max-w-lg mx-auto">
             <Card>
               <CardContent className="p-6">
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -132,7 +132,7 @@ export default function Contact() {
                     <Checkbox
                       id="consentimento"
                       checked={formData.consentimento}
-                      onCheckedChange={(checked) => 
+                      onCheckedChange={(checked) =>
                         setFormData({ ...formData, consentimento: checked as boolean })
                       }
                     />
@@ -142,17 +142,16 @@ export default function Contact() {
                   </div>
 
                   {submitMessage && (
-                    <div className={`p-3 rounded-lg text-sm ${
-                      submitMessage.includes('sucesso') 
-                        ? 'bg-success/10 text-success' 
-                        : 'bg-destructive/10 text-destructive'
-                    }`}>
+                    <div className={`p-3 rounded-lg text-sm ${submitMessage.includes('sucesso')
+                      ? 'bg-success/10 text-success'
+                      : 'bg-destructive/10 text-destructive'
+                      }`}>
                       {submitMessage}
                     </div>
                   )}
 
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     disabled={isSubmitting}
                     className="w-full gradient-primary hover:opacity-90"
                   >
@@ -165,7 +164,7 @@ export default function Contact() {
           </div>
 
           {/* Contact Info */}
-          <div className="space-y-6 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+          <div className="space-y-6 animate-slide-up max-w-lg mx-auto" style={{ animationDelay: '0.1s' }}>
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-start space-x-4">
@@ -222,7 +221,7 @@ export default function Contact() {
 
             {/* FAQ Section */}
             <Card>
-              <CardContent className="p-6">
+              <CardContent className="p-6 select-none">
                 <h3 className="font-semibold mb-4">Perguntas Frequentes</h3>
                 <div className="space-y-3">
                   <details className="group">
