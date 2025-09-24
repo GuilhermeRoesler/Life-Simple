@@ -1,37 +1,117 @@
-import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, Send, X, Minimize2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card } from '@/components/ui/card';
-import { ChatMessage } from '@/types';
-import { CHATBOT_API_URL, CHATBOT_API_KEY } from '@/utils/products';
+import React, { useState, useRef, useEffect } from 'react';
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
+import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, Timestamp } from 'firebase/firestore';
+
+// --- INSTRUÇÕES DE CONFIGURAÇÃO ---
+// 1. Cole sua chave de API do Google Gemini aqui.
+//    Você pode obter uma em: https://aistudio.google.com/app/apikey
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+
+// 2. Cole a configuração do seu projeto Firebase abaixo.
+//    Veja o arquivo README.md para instruções detalhadas.
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
+};
+// --- FIM DAS INSTRUÇÕES ---
+
+// Componentes de Ícones SVG (substituindo lucide-react)
+const MessageCircle = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></svg>
+);
+const Send = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg>
+);
+const X = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+);
+const Minimize2 = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M4 14h6v6" /><path d="M20 10h-6V4" /><path d="M14 10l7-7" /><path d="M3 21l7-7" /></svg>
+);
+
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      id: '1',
-      text: 'Olá! Bem-vindo à Life Simple. Em que posso ajudar? Você quer ver produtos para Emagrecimento ou Academia?',
-      sender: 'bot',
-      timestamp: new Date()
-    }
-  ]);
+  const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [error, setError] = useState('');
 
+  // Estados do Firebase
+  const [db, setDb] = useState(null);
+  const [userId, setUserId] = useState(null);
+
+  const messagesEndRef = useRef(null);
+
+  // Efeito para inicializar o Firebase e autenticar o usuário
   useEffect(() => {
-    // Load chat history from localStorage
-    const savedMessages = localStorage.getItem('pharmacy-chat-history');
-    if (savedMessages) {
-      setMessages(JSON.parse(savedMessages));
+    try {
+      if (!firebaseConfig || !firebaseConfig.apiKey || firebaseConfig.apiKey.includes("SUA_API_KEY_AQUI")) {
+        throw new Error("Configuração do Firebase não encontrada ou inválida. Verifique o objeto firebaseConfig.");
+      }
+      const app = initializeApp(firebaseConfig);
+      const firestore = getFirestore(app);
+      const auth = getAuth(app);
+      setDb(firestore);
+
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          setUserId(user.uid);
+        } else {
+          try {
+            await signInAnonymously(auth);
+          } catch (authError) {
+            console.error("Erro na autenticação anônima:", authError);
+            setError("Falha ao autenticar. O chat não funcionará.");
+          }
+        }
+      });
+    } catch (e) {
+      console.error("Erro ao inicializar Firebase:", e);
+      setError(e.message);
     }
   }, []);
 
+  // Efeito para buscar mensagens do Firestore em tempo real
   useEffect(() => {
-    // Save chat history to localStorage
-    localStorage.setItem('pharmacy-chat-history', JSON.stringify(messages));
+    if (db && userId) {
+      const messagesCollectionPath = `chats/${userId}/messages`;
+      const q = query(collection(db, messagesCollectionPath), orderBy("timestamp", "asc"));
+
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const msgs = [];
+        querySnapshot.forEach((doc) => {
+          msgs.push({ id: doc.id, ...doc.data() });
+        });
+
+        // Adiciona a mensagem inicial se o chat estiver vazio
+        if (msgs.length === 0) {
+          const initialBotMessage = {
+            text: 'Olá! Bem-vindo à Life Simple. Em que posso ajudar? Você tem interesse por algum produto?',
+            sender: 'bot',
+            timestamp: Timestamp.now()
+          };
+          addDoc(collection(db, messagesCollectionPath), initialBotMessage);
+        }
+
+        setMessages(msgs);
+      }, (err) => {
+        console.error("Erro ao buscar mensagens:", err);
+        setError("Não foi possível carregar o histórico de mensagens.");
+      });
+
+      // Limpa o listener ao desmontar o componente
+      return () => unsubscribe();
+    }
+  }, [db, userId]);
+
+  useEffect(() => {
     scrollToBottom();
   }, [messages]);
 
@@ -40,73 +120,75 @@ export default function Chatbot() {
   };
 
   const sendMessage = async () => {
-    if (!inputMessage.trim()) return;
+    if (!inputMessage.trim() || !db || !userId) return;
 
-    const userMessage: ChatMessage = {
-      id: Date.now().toString(),
+    const messagesCollectionPath = `chats/${userId}/messages`;
+    const userMessage = {
       text: inputMessage,
       sender: 'user',
-      timestamp: new Date()
+      timestamp: Timestamp.now()
     };
 
-    setMessages(prev => [...prev, userMessage]);
     setInputMessage('');
-    setIsTyping(true);
 
     try {
-      // Attempt to call the API
-      const response = await fetch(CHATBOT_API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${CHATBOT_API_KEY}`
+      await addDoc(collection(db, messagesCollectionPath), userMessage);
+
+      setIsTyping(true);
+
+      if (!GEMINI_API_KEY) {
+        throw new Error('Chave de API do Gemini não configurada.');
+      }
+
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${GEMINI_API_KEY}`;
+
+      const systemPrompt = `Você é um assistente virtual da "Life Simple", uma farmácia de manipulação. Seu nome é Simples.
+        Sua personalidade é amigável, prestativa e profissional.
+        Seu objetivo é ajudar os clientes com dúvidas sobre produtos para emagrecimento, academia, preços e direcioná-los para o catálogo de produtos ou para o atendimento via WhatsApp para um suporte personalizado.
+        Responda em português do Brasil. Mantenha as respostas curtas e diretas.`;
+
+      const payload = {
+        contents: [{ parts: [{ text: inputMessage }] }],
+        systemInstruction: {
+          parts: [{ text: systemPrompt }]
         },
-        body: JSON.stringify({ message: inputMessage })
+      };
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        const botMessage: ChatMessage = {
-          id: (Date.now() + 1).toString(),
-          text: data.response || 'Desculpe, não entendi. Pode reformular?',
-          sender: 'bot',
-          timestamp: new Date()
-        };
-        setMessages(prev => [...prev, botMessage]);
-      } else {
-        throw new Error('API request failed');
-      }
-    } catch (error) {
-      // Mock response when API is not available
-      console.log('Using mock response - API integration pending');
-      
-      let mockResponse = 'Obrigado pela sua mensagem! ';
-      
-      if (inputMessage.toLowerCase().includes('emagrecimento')) {
-        mockResponse += 'Temos ótimas opções de produtos para emagrecimento. Você pode ver nosso catálogo na seção de produtos ou falar conosco pelo WhatsApp para orientação personalizada.';
-      } else if (inputMessage.toLowerCase().includes('academia')) {
-        mockResponse += 'Nossos produtos para academia são formulados para maximizar seus resultados. Confira o catálogo ou entre em contato para uma consultoria gratuita.';
-      } else if (inputMessage.toLowerCase().includes('preço') || inputMessage.toLowerCase().includes('valor')) {
-        mockResponse += 'Nossos preços variam de acordo com a formulação. Você pode ver os valores no catálogo de produtos ou solicitar um orçamento personalizado pelo WhatsApp.';
-      } else {
-        mockResponse += 'Para melhor atendê-lo, recomendo entrar em contato pelo WhatsApp onde nossa equipe pode fornecer orientação personalizada. Você também pode navegar pelo nosso catálogo de produtos.';
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error?.message || `Erro da API: ${response.statusText}`);
       }
 
-      const botMessage: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        text: mockResponse,
+      const data = await response.json();
+      const botResponseText = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Desculpe, não consegui processar sua solicitação no momento.';
+
+      const botMessage = {
+        text: botResponseText,
         sender: 'bot',
-        timestamp: new Date()
+        timestamp: Timestamp.now()
       };
-      
-      setTimeout(() => {
-        setMessages(prev => [...prev, botMessage]);
-        setIsTyping(false);
-      }, 1500);
+      await addDoc(collection(db, messagesCollectionPath), botMessage);
+
+    } catch (error) {
+      console.error("Erro ao enviar mensagem:", error);
+      const errorMessage = {
+        text: `Ocorreu um erro: ${error.message}. Por favor, verifique a configuração da API ou tente novamente mais tarde.`,
+        sender: 'bot',
+        timestamp: Timestamp.now()
+      };
+      await addDoc(collection(db, messagesCollectionPath), errorMessage);
+    } finally {
+      setIsTyping(false);
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyPress = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       sendMessage();
@@ -115,79 +197,80 @@ export default function Chatbot() {
 
   if (!isOpen) {
     return (
-      <Button
+      <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-40 h-14 w-14 rounded-full shadow-lg gradient-primary hover:opacity-90"
-        size="icon"
+        className="fixed bottom-6 right-6 z-40 h-16 w-16 rounded-full text-primary-foreground gradient-primary flex items-center justify-center hover:bg-blue-700 transition-all"
+        aria-label="Abrir chat"
       >
-        <MessageCircle className="h-6 w-6" />
-      </Button>
+        <MessageCircle className="h-8 w-8" />
+      </button>
     );
   }
 
   return (
-    <Card className={`fixed bottom-6 right-6 z-40 shadow-2xl transition-all duration-300 ${
-      isMinimized ? 'h-14' : 'h-[500px]'
-    } w-[350px] md:w-[400px]`}>
+    <div className={`fixed bottom-6 right-6 z-40 shadow-2xl transition-all duration-300 rounded-lg bg-card border border-border ${isMinimized ? 'h-14' : 'h-[500px]'
+      } w-[350px] md:w-[400px] flex flex-col`}>
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b gradient-primary text-primary-foreground rounded-t-lg">
+      <div className="flex items-center justify-between p-3 border-b border-border/50 gradient-primary text-primary-foreground rounded-t-lg">
         <div className="flex items-center space-x-2">
           <MessageCircle className="h-5 w-5" />
-          <span className="font-semibold">Assistente Virtual</span>
+          <span className="font-semibold text-base">Assistente Virtual</span>
         </div>
         <div className="flex items-center space-x-1">
-          <Button
-            variant="ghost"
-            size="icon"
+          <button
             onClick={() => setIsMinimized(!isMinimized)}
-            className="h-8 w-8 text-primary-foreground hover:bg-primary-foreground/20"
+            className="h-8 w-8 rounded-full text-primary-foreground hover:bg-black/10 flex items-center justify-center transition-colors"
+            aria-label="Minimizar chat"
           >
             <Minimize2 className="h-4 w-4" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
+          </button>
+          <button
             onClick={() => setIsOpen(false)}
-            className="h-8 w-8 text-primary-foreground hover:bg-primary-foreground/20"
+            className="h-8 w-8 rounded-full text-primary-foreground hover:bg-black/10 flex items-center justify-center transition-colors"
+            aria-label="Fechar chat"
           >
             <X className="h-4 w-4" />
-          </Button>
+          </button>
         </div>
       </div>
 
       {!isMinimized && (
         <>
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-3 h-[380px]">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-background h-[calc(100%-120px)]">
+            {error && <p className="text-destructive text-center text-sm p-2 bg-destructive/20 rounded-md">{error}</p>}
             {messages.map((message) => (
               <div
                 key={message.id}
-                className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                className={`flex items-end gap-2 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-[80%] rounded-lg p-3 ${
-                    message.sender === 'user'
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-accent text-accent-foreground'
-                  }`}
+                  className={`max-w-[80%] rounded-xl p-3 ${message.sender === 'user'
+                    ? 'bg-primary text-primary-foreground rounded-br-none'
+                    : 'bg-secondary text-secondary-foreground rounded-bl-none'
+                    }`}
                 >
-                  <p className="text-sm">{message.text}</p>
-                  <p className="text-xs opacity-70 mt-1">
-                    {message.timestamp.toLocaleTimeString('pt-BR', { 
-                      hour: '2-digit', 
-                      minute: '2-digit' 
-                    })}
+                  <p className="text-sm" style={{ whiteSpace: 'pre-wrap' }}>{message.text}</p>
+                  <p className="text-xs opacity-70 mt-1 text-right">
+                    {message.timestamp && typeof message.timestamp.toDate === 'function'
+                      ? message.timestamp.toDate().toLocaleTimeString('pt-BR', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })
+                      : ''
+                    }
                   </p>
                 </div>
               </div>
             ))}
             {isTyping && (
               <div className="flex justify-start">
-                <div className="bg-accent text-accent-foreground rounded-lg p-3">
-                  <div className="flex space-x-1">
-                    <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                    <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                    <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                <div className="bg-secondary rounded-xl p-3 rounded-bl-none">
+                  <div className="flex space-x-1 items-center">
+                    <span className="text-sm text-secondary-foreground/80">Digitando</span>
+                    <div className="w-1.5 h-1.5 bg-secondary-foreground/80 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                    <div className="w-1.5 h-1.5 bg-secondary-foreground/80 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                    <div className="w-1.5 h-1.5 bg-secondary-foreground/80 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
                   </div>
                 </div>
               </div>
@@ -196,26 +279,27 @@ export default function Chatbot() {
           </div>
 
           {/* Input */}
-          <div className="p-4 border-t">
+          <div className="p-3 border-t border-border bg-card">
             <div className="flex space-x-2">
-              <Input
+              <input
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Digite sua mensagem..."
-                className="flex-1"
+                className="flex-1 p-2 border border-border bg-input text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
               />
-              <Button
+              <button
                 onClick={sendMessage}
-                size="icon"
-                className="gradient-primary hover:opacity-90"
+                disabled={!inputMessage.trim()}
+                className="w-10 h-10 flex-shrink-0 gradient-primary text-primary-foreground rounded-full flex items-center justify-center hover:opacity-90 disabled:bg-muted disabled:opacity-50 transition-all"
+                aria-label="Enviar mensagem"
               >
-                <Send className="h-4 w-4" />
-              </Button>
+                <Send className="h-5 w-5" />
+              </button>
             </div>
           </div>
         </>
       )}
-    </Card>
+    </div>
   );
 }

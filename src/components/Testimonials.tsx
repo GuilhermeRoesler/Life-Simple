@@ -31,6 +31,12 @@ const testimonials = [
     city: 'Porto Alegre, RS',
     rating: 5,
     text: 'Finalmente encontrei uma farmácia que entende minhas necessidades. Produtos personalizados fazem toda a diferença!'
+  },
+  {
+    "name": "Ricardo Alves",
+    "city": "Salvador, BA",
+    "rating": 5,
+    "text": "O processo de consulta online foi muito prático e a equipe foi super atenciosa para criar a fórmula ideal para mim. Resultados visíveis em poucas semanas!"
   }
 ];
 
@@ -49,7 +55,7 @@ export default function Testimonials() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((testimonial, index) => (
-            <Card 
+            <Card
               key={index}
               className="hover:shadow-lg transition-shadow duration-300 animate-slide-up"
               style={{ animationDelay: `${index * 0.1}s` }}

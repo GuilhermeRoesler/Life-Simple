@@ -1,7 +1,7 @@
 export interface Product {
   id: string;
   nome: string;
-  categoria: 'Emagrecimento' | 'Academia';
+  categoria: 'Emagrecimento' | 'Academia' | 'Cabelo' | 'Pele';
   descricao_curta: string;
   descricao_longa: string;
   preco: string;

@@ -22,21 +22,21 @@ export default function Hero() {
               Manipulados com <span className="text-primary">segurança</span> e <span className="text-primary">resultados</span>
             </h1>
             <p className="text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed">
-              Fórmulas personalizadas para emagrecimento e performance. 
+              Fórmulas personalizadas para emagrecimento e performance.
               Entrega rápida e acompanhamento profissional.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 onClick={handleWhatsApp}
                 className="gradient-primary hover:opacity-90 transition-opacity"
               >
                 <MessageCircle className="mr-2 h-5 w-5" />
                 Fale com a gente
               </Button>
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 variant="outline"
                 onClick={scrollToProducts}
                 className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
@@ -78,11 +78,6 @@ export default function Hero() {
           {/* Image Placeholder */}
           <div className="relative animate-fade-in">
             <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
-              <img 
-                src="https://via.placeholder.com/600x500?text=Farmácia+Moderna" 
-                alt="Farmácia de Manipulação"
-                className="w-full h-auto"
-              />
             </div>
             <div className="absolute inset-0 gradient-primary opacity-10 rounded-2xl transform rotate-3"></div>
           </div>

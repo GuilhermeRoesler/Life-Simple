@@ -9,63 +9,83 @@
 @layer base {
   :root {
     /* Life Simple Colors - Natural Earth Tones */
-    --background: 30 17% 92%; /* IVORY #EDE9E3 */
-    --foreground: 76 20% 30%; /* FOREST #5D6043 */
-    
+    --background: 30 17% 92%;
+    /* IVORY #EDE9E3 */
+    --foreground: 76 20% 30%;
+    /* FOREST #5D6043 */
+
     /* Primary - TERRACOTTA */
-    --primary: 16 37% 43%; /* TERRACOTTA #925B42 */
-    --primary-foreground: 30 17% 92%; /* IVORY */
+    --primary: 16 37% 43%;
+    /* TERRACOTTA #925B42 */
+    --primary-foreground: 30 17% 92%;
+    /* IVORY */
     --primary-light: 16 30% 55%;
     --primary-dark: 16 40% 35%;
-    
+
     /* Secondary - SAGE */
-    --secondary: 62 7% 64%; /* SAGE #AAAB96 */
-    --secondary-foreground: 76 20% 30%; /* FOREST */
-    
+    --secondary: 62 7% 64%;
+    /* SAGE #AAAB96 */
+    --secondary-foreground: 76 20% 30%;
+    /* FOREST */
+
     /* Accent & Muted */
-    --accent: 31 17% 77%; /* LATTE #CBBCA7 */
-    --accent-foreground: 76 20% 30%; /* FOREST */
-    
-    --muted: 31 17% 77%; /* LATTE */
+    --accent: 31 17% 77%;
+    /* LATTE #CBBCA7 */
+    --accent-foreground: 76 20% 30%;
+    /* FOREST */
+
+    --muted: 31 17% 77%;
+    /* LATTE */
     --muted-foreground: 76 20% 30%;
-    
+
     /* Card & Popover */
-    --card: 30 17% 92%; /* IVORY */
-    --card-foreground: 76 20% 30%; /* FOREST */
-    
-    --popover: 30 17% 92%; /* IVORY */
-    --popover-foreground: 76 20% 30%; /* FOREST */
-    
+    --card: 30 17% 92%;
+    /* IVORY */
+    --card-foreground: 76 20% 30%;
+    /* FOREST */
+
+    --popover: 30 17% 92%;
+    /* IVORY */
+    --popover-foreground: 76 20% 30%;
+    /* FOREST */
+
     /* System Colors */
     --destructive: 0 84% 60%;
     --destructive-foreground: 30 17% 92%;
-    
-    --success: 62 7% 64%; /* SAGE-like success */
+
+    --success: 62 7% 64%;
+    /* SAGE-like success */
     --success-foreground: 30 17% 92%;
-    
-    --warning: 16 37% 43%; /* TERRACOTTA-like warning */
+
+    --warning: 16 37% 43%;
+    /* TERRACOTTA-like warning */
     --warning-foreground: 30 17% 92%;
-    
+
     /* Borders & Inputs */
-    --border: 31 17% 77%; /* LATTE */
-    --input: 30 17% 92%; /* IVORY */
-    --ring: 16 37% 43%; /* TERRACOTTA */
-    
+    --border: 31 17% 77%;
+    /* LATTE */
+    --input: 30 17% 92%;
+    /* IVORY */
+    --ring: 16 37% 43%;
+    /* TERRACOTTA */
+
     /* Shadows & Effects */
     --shadow-sm: 0 1px 2px 0 rgb(93 96 67 / 0.05);
     --shadow: 0 4px 6px -1px rgb(93 96 67 / 0.1);
     --shadow-md: 0 10px 15px -3px rgb(93 96 67 / 0.1);
     --shadow-lg: 0 20px 25px -5px rgb(93 96 67 / 0.1);
     --shadow-xl: 0 25px 50px -12px rgb(93 96 67 / 0.25);
-    
+
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(16 37% 43%), hsl(16 30% 55%)); /* TERRACOTTA gradient */
+    --gradient-primary: linear-gradient(135deg, hsl(16 37% 43%), hsl(16 30% 55%));
+    /* TERRACOTTA gradient */
     --gradient-hero: linear-gradient(180deg, hsl(30 17% 92%), hsl(31 17% 85%));
-    --gradient-card: linear-gradient(180deg, hsl(30 17% 92%), hsl(62 7% 70%)); /* IVORY to light SAGE */
-    
+    --gradient-card: linear-gradient(180deg, hsl(30 17% 92%), hsl(62 7% 70%));
+    /* IVORY to light SAGE */
+
     /* Radius */
     --radius: 0.75rem;
-    
+
     /* Animations */
     --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -74,17 +94,22 @@
 
   /* Dark mode disabled - keep same natural theme */
   .dark {
-    --background: 30 17% 92%; /* IVORY */
-    --foreground: 76 20% 30%; /* FOREST */
-    --primary: 16 37% 43%; /* TERRACOTTA */
+    --background: 30 17% 92%;
+    /* IVORY */
+    --foreground: 76 20% 30%;
+    /* FOREST */
+    --primary: 16 37% 43%;
+    /* TERRACOTTA */
     --primary-foreground: 30 17% 92%;
-    --secondary: 62 7% 64%; /* SAGE */
+    --secondary: 62 7% 64%;
+    /* SAGE */
     --secondary-foreground: 76 20% 30%;
     --card: 30 17% 92%;
     --card-foreground: 76 20% 30%;
     --popover: 30 17% 92%;
     --popover-foreground: 76 20% 30%;
-    --accent: 31 17% 77%; /* LATTE */
+    --accent: 31 17% 77%;
+    /* LATTE */
     --accent-foreground: 76 20% 30%;
     --muted: 31 17% 77%;
     --muted-foreground: 76 20% 30%;
@@ -94,7 +119,7 @@
     --input: 30 17% 92%;
     --ring: 16 37% 43%;
   }
-  
+
   * {
     @apply border-border;
   }
@@ -102,8 +127,13 @@
   body {
     @apply bg-background text-foreground;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-poppins;
   }
 }
@@ -113,19 +143,19 @@
   .animate-fade-in {
     animation: fade-in 0.5s ease-out;
   }
-  
+
   .animate-slide-up {
     animation: slide-up 0.5s ease-out;
   }
-  
+
   .glass-effect {
     @apply backdrop-blur-md bg-white/80 border border-white/20;
   }
-  
+
   .gradient-primary {
     background: var(--gradient-primary);
   }
-  
+
   .gradient-hero {
     background: var(--gradient-hero);
   }
@@ -137,6 +167,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -148,6 +179,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

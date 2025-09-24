@@ -73,9 +73,10 @@ export default function Products() {
 
         {/* Product Tabs */}
         <Tabs defaultValue="Emagrecimento" className="w-full">
-          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2">
+          <TabsList className="grid w-full max-w-md mx-auto grid-cols-3">
             <TabsTrigger value="Emagrecimento">Emagrecimento</TabsTrigger>
             <TabsTrigger value="Academia">Academia</TabsTrigger>
+            <TabsTrigger value="Pele">Pele</TabsTrigger>
           </TabsList>
 
           <TabsContent value="Emagrecimento" className="mt-8">
@@ -156,6 +157,74 @@ export default function Products() {
               <CarouselContent className="-ml-2 md:-ml-4">
                 {filteredProducts
                   .filter(p => p.categoria === 'Academia')
+                  .map((product) => (
+                    <CarouselItem key={product.id} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+                      <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full">
+                        <div className="aspect-video relative overflow-hidden bg-accent flex items-center justify-center p-4">
+                          <img
+                            src={product.imagem}
+                            alt={product.nome}
+                            className="h-full object-cover"
+                          />
+                          {isEditMode && (
+                            <div className="absolute top-2 right-2 flex gap-2">
+                              <Button
+                                size="icon"
+                                variant="secondary"
+                                onClick={() => {/* Open edit panel */ }}
+                              >
+                                <Edit className="h-4 w-4" />
+                              </Button>
+                              <Button
+                                size="icon"
+                                variant="destructive"
+                                onClick={() => deleteProduct(product.id)}
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          )}
+                        </div>
+                        <CardHeader>
+                          <CardTitle className="text-xl">{product.nome}</CardTitle>
+                          <CardDescription>{product.descricao_curta}</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-2xl font-bold text-primary">
+                            R$ {product.preco}
+                          </p>
+                        </CardContent>
+                        <CardFooter>
+                          <Button
+                            size="sm"
+                            onClick={() => handleViewDetails(product)}
+                            className="w-full gradient-primary hover:opacity-90"
+                          >
+                            <Eye className="mr-2 h-4 w-4" />
+                            Ver Detalhes
+                          </Button>
+                        </CardFooter>
+                      </Card>
+                    </CarouselItem>
+                  ))}
+              </CarouselContent>
+              <CarouselPrevious className="hidden md:flex" />
+              <CarouselNext className="hidden md:flex" />
+            </Carousel>
+          </TabsContent>
+
+          {/* fdssdf */}
+          <TabsContent value="Pele" className="mt-8">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {filteredProducts
+                  .filter(p => p.categoria === 'Pele')
                   .map((product) => (
                     <CarouselItem key={product.id} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
                       <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full">
