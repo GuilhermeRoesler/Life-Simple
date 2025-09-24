@@ -32,15 +32,15 @@ export default function Header() {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-accent shadow-md' : 'bg-accent/95 backdrop-blur-sm'
+    <header className={`absolute top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300 ${isScrolled ? 'bg-accent shadow-md' : 'bg-accent/95 backdrop-blur-sm'
       }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <div className="flex items-center">
             <a href="#home" onClick={(e) => { e.preventDefault(); handleNavClick('#home'); }} className="flex items-center space-x-3">
-              <img src={"/icon.png"} alt="Life Simple" className="h-12 lg:h-14 w-auto" />
-              <span className="text-xl lg:text-2xl font-bold text-accent-foreground">Life Simple</span>
+              <img src={"/icon.png"} alt="Life Simple" className="h-20 lg:h-20 w-auto" />
+              <span className="text-xl lg:text-2xl text-white" style={{fontFamily: 'Inter', fontWeight: '300'}}>Life Simple</span>
             </a>
           </div>
 
@@ -54,7 +54,7 @@ export default function Header() {
                   e.preventDefault();
                   handleNavClick(item.href);
                 }}
-                className="text-accent-foreground hover:text-primary transition-colors duration-200 font-medium"
+                className="text-white hover:text-primary transition-colors duration-200 font-medium"
               >
                 {item.label}
               </a>
@@ -70,7 +70,7 @@ export default function Header() {
                 size="icon"
                 onClick={() => window.open(`https://wa.me/${WHATSAPP_NUMBER}`, '_blank')}
               >
-                <MessageCircle className="h-5 w-5" />
+                <MessageCircle className="h-5 w-5 text-red hover:text-red" />
               </Button>
               <Button
                 variant="ghost"

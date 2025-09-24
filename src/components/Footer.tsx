@@ -53,7 +53,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li className="flex items-center space-x-2">
                 <MapPin className="w-4 h-4" />
-                <span className="opacity-90">Rua das Farmácias, 123</span>
+                <span className="opacity-90">Tv. São José, 455</span>
               </li>
               <li className="flex items-center space-x-2">
                 <MessageCircle className="w-4 h-4" />
@@ -63,16 +63,16 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:underline opacity-90 hover:opacity-100"
                 >
-                  (11) 99999-9999
+                  (51) 99999-9999
                 </a>
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="w-4 h-4" />
                 <a 
-                  href="mailto:contato@farmacia.com.br"
+                  href="mailto:lifesimple@gmail.com"
                   className="hover:underline opacity-90 hover:opacity-100"
                 >
-                  contato@farmacia.com.br
+                 lifesimple@gmail.com
                 </a>
               </li>
             </ul>
@@ -101,7 +101,7 @@ export default function Footer() {
             </div>
             <div className="text-sm opacity-90">
               <p className="font-semibold mb-1">Horário:</p>
-              <p>Seg-Sex: 8h às 20h</p>
+              <p>Segunda-Sexta: 8h às 20h</p>
               <p>Sábado: 8h às 14h</p>
             </div>
           </div>

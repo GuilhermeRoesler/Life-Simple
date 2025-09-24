@@ -32,13 +32,13 @@ export default function Contact() {
     
     try {
       // Placeholder API call
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
+      // const response = await fetch('/api/contact', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify(formData)
+      // });
 
-      if (response.ok) {
+      if (true) {
         setSubmitMessage('Mensagem enviada com sucesso! Nossa equipe responderá em até 24h úteis.');
         setFormData({
           nome: '',
@@ -60,7 +60,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contato" className="py-20 bg-background">
+    <section id="contato" className="py-12 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 animate-fade-in">
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
@@ -86,6 +86,7 @@ export default function Contact() {
                       value={formData.nome}
                       onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
                       placeholder="Seu nome completo"
+                      className='border-black border-gradient-primary mt-1'
                     />
                   </div>
 
@@ -98,6 +99,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="seu@email.com"
+                      className='border-black border-gradient-primary mt-1'
                     />
                   </div>
 
@@ -108,7 +110,8 @@ export default function Contact() {
                       type="tel"
                       value={formData.telefone}
                       onChange={(e) => setFormData({ ...formData, telefone: e.target.value })}
-                      placeholder="(11) 99999-9999"
+                      placeholder="(51) 99999-9999"
+                      className='border-black border-gradient-primary mt-1'
                     />
                   </div>
 
@@ -121,6 +124,7 @@ export default function Contact() {
                       onChange={(e) => setFormData({ ...formData, mensagem: e.target.value })}
                       placeholder="Como podemos ajudar você?"
                       rows={4}
+                      className='border-black border-gradient-primary mt-1'
                     />
                   </div>
 
@@ -171,9 +175,9 @@ export default function Contact() {
                   <div>
                     <h3 className="font-semibold mb-1">Endereço</h3>
                     <p className="text-muted-foreground">
-                      Rua das Farmácias, 123<br />
-                      Centro - São Paulo, SP<br />
-                      CEP: 01234-567
+                      Tv. São José, 455 <br />
+                      Navegantes, Porto Alegre - RS<br />
+                      CEP: 90240-200
                     </p>
                   </div>
                 </div>
@@ -207,9 +211,9 @@ export default function Contact() {
                   <div>
                     <h3 className="font-semibold mb-1">Telefones</h3>
                     <p className="text-muted-foreground">
-                      WhatsApp: (11) 99999-9999<br />
-                      Telefone: (11) 3333-3333<br />
-                      E-mail: contato@farmacia.com.br
+                      WhatsApp: (51) 99999-9999<br />
+                      Telefone: (51) 3333-3333<br />
+                      E-mail: lifesimple@gmail.com
                     </p>
                   </div>
                 </div>

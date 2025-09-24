@@ -4,84 +4,88 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Pharmacy Design System - Green & White Theme */
+/* Pharmacy Design System - Teal, Blue & White Theme */
 
 @layer base {
   :root {
-    /* Life Simple Colors - Natural Earth Tones */
-    --background: 30 17% 92%;
-    /* IVORY #EDE9E3 */
-    --foreground: 76 20% 30%;
-    /* FOREST #5D6043 */
+    /* Modern Pharmacy Palette - Clean & Trustworthy */
+    --background: 0 0% 100%;
+    /* WHITE #FFFFFF */
+    --foreground: 210 20% 15%;
+    /* DARK CHARCOAL #212931 */
 
-    /* Primary - TERRACOTTA */
-    --primary: 16 37% 43%;
-    /* TERRACOTTA #925B42 */
-    --primary-foreground: 30 17% 92%;
-    /* IVORY */
-    --primary-light: 16 30% 55%;
-    --primary-dark: 16 40% 35%;
+    /* Primary - CALM TEAL */
+    --primary: 175 40% 45%;
+    /* TEAL #4E9C95 */
+    --primary-foreground: 0 0% 100%;
+    /* WHITE */
+    --primary-light: 175 40% 55%;
+    --primary-dark: 175 40% 35%;
 
-    /* Secondary - SAGE */
-    --secondary: 62 7% 64%;
-    /* SAGE #AAAB96 */
-    --secondary-foreground: 76 20% 30%;
-    /* FOREST */
+    /* Secondary - Light Grayish Blue */
+    --secondary: 210 30% 96%;
+    /* LIGHT GRAY-BLUE #F2F5F9 */
+    --secondary-foreground: 210 20% 15%;
+    /* DARK CHARCOAL */
 
     /* Accent & Muted */
-    --accent: 31 17% 77%;
-    /* LATTE #CBBCA7 */
-    --accent-foreground: 76 20% 30%;
-    /* FOREST */
+    --accent: 210 30% 92%;
+    /* LIGHTER GRAY-BLUE #E8ECF2 */
+    --accent-foreground: 210 20% 15%;
+    /* DARK CHARCOAL */
 
-    --muted: 31 17% 77%;
-    /* LATTE */
-    --muted-foreground: 76 20% 30%;
+    --muted: 210 30% 96%;
+    /* LIGHT GRAY-BLUE */
+    --muted-foreground: 210 15% 45%;
+    /* MEDIUM GRAY #66707B */
 
     /* Card & Popover */
-    --card: 30 17% 92%;
-    /* IVORY */
-    --card-foreground: 76 20% 30%;
-    /* FOREST */
+    --card: 0 0% 100%;
+    /* WHITE */
+    --card-foreground: 210 20% 15%;
+    /* DARK CHARCOAL */
 
-    --popover: 30 17% 92%;
-    /* IVORY */
-    --popover-foreground: 76 20% 30%;
-    /* FOREST */
+    --popover: 0 0% 100%;
+    /* WHITE */
+    --popover-foreground: 210 20% 15%;
+    /* DARK CHARCOAL */
 
     /* System Colors */
     --destructive: 0 84% 60%;
-    --destructive-foreground: 30 17% 92%;
+    --destructive-foreground: 0 0% 100%;
 
-    --success: 62 7% 64%;
-    /* SAGE-like success */
-    --success-foreground: 30 17% 92%;
+    --success: 140 60% 40%;
+    /* SUCCESS GREEN #29A34C */
+    --success-foreground: 0 0% 100%;
 
-    --warning: 16 37% 43%;
-    /* TERRACOTTA-like warning */
-    --warning-foreground: 30 17% 92%;
+    --warning: 30 90% 55%;
+    /* WARM AMBER #F7931E */
+    --warning-foreground: 0 0% 100%;
 
     /* Borders & Inputs */
-    --border: 31 17% 77%;
-    /* LATTE */
-    --input: 30 17% 92%;
-    /* IVORY */
-    --ring: 16 37% 43%;
-    /* TERRACOTTA */
+    --border: 210 20% 85%;
+    /* LIGHT GRAY #D1D8E0 */
+    --input: 210 20% 92%;
+    /* VERY LIGHT GRAY #E8ECF2 */
+    --ring: 175 40% 45%;
+    /* TEAL */
 
-    /* Shadows & Effects */
-    --shadow-sm: 0 1px 2px 0 rgb(93 96 67 / 0.05);
-    --shadow: 0 4px 6px -1px rgb(93 96 67 / 0.1);
-    --shadow-md: 0 10px 15px -3px rgb(93 96 67 / 0.1);
-    --shadow-lg: 0 20px 25px -5px rgb(93 96 67 / 0.1);
-    --shadow-xl: 0 25px 50px -12px rgb(93 96 67 / 0.25);
+    --text-white: white;
+    --text-black: black;
+    --text-red: red;
+
+    /* Shadows & Effects (subtler shadows) */
+    --shadow-sm: 0 1px 2px 0 hsl(210 20% 15% / 0.05);
+    --shadow: 0 4px 6px -1px hsl(210 20% 15% / 0.1);
+    --shadow-md: 0 10px 15px -3px hsl(210 20% 15% / 0.1);
+    --shadow-lg: 0 20px 25px -5px hsl(210 20% 15% / 0.1);
+    --shadow-xl: 0 25px 50px -12px hsl(210 20% 15% / 0.25);
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(16 37% 43%), hsl(16 30% 55%));
-    /* TERRACOTTA gradient */
-    --gradient-hero: linear-gradient(180deg, hsl(30 17% 92%), hsl(31 17% 85%));
-    --gradient-card: linear-gradient(180deg, hsl(30 17% 92%), hsl(62 7% 70%));
-    /* IVORY to light SAGE */
+    --gradient-primary: linear-gradient(135deg, hsl(175 40% 45%), hsl(175 40% 55%));
+    /* TEAL gradient */
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 30% 96%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 30% 98%));
 
     /* Radius */
     --radius: 0.75rem;
@@ -92,32 +96,27 @@
     --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Dark mode disabled - keep same natural theme */
+  /* Dark mode theme */
   .dark {
-    --background: 30 17% 92%;
-    /* IVORY */
-    --foreground: 76 20% 30%;
-    /* FOREST */
-    --primary: 16 37% 43%;
-    /* TERRACOTTA */
-    --primary-foreground: 30 17% 92%;
-    --secondary: 62 7% 64%;
-    /* SAGE */
-    --secondary-foreground: 76 20% 30%;
-    --card: 30 17% 92%;
-    --card-foreground: 76 20% 30%;
-    --popover: 30 17% 92%;
-    --popover-foreground: 76 20% 30%;
-    --accent: 31 17% 77%;
-    /* LATTE */
-    --accent-foreground: 76 20% 30%;
-    --muted: 31 17% 77%;
-    --muted-foreground: 76 20% 30%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 30 17% 92%;
-    --border: 31 17% 77%;
-    --input: 30 17% 92%;
-    --ring: 16 37% 43%;
+    --background: 210 20% 12%;
+    --foreground: 210 20% 95%;
+    --primary: 175 45% 55%;
+    --primary-foreground: 210 20% 12%;
+    --secondary: 210 20% 18%;
+    --secondary-foreground: 210 20% 95%;
+    --card: 210 20% 15%;
+    --card-foreground: 210 20% 95%;
+    --popover: 210 20% 15%;
+    --popover-foreground: 210 20% 95%;
+    --accent: 210 20% 22%;
+    --accent-foreground: 210 20% 95%;
+    --muted: 210 20% 18%;
+    --muted-foreground: 210 15% 65%;
+    --destructive: 0 74% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 210 20% 25%;
+    --input: 210 20% 22%;
+    --ring: 175 45% 55%;
   }
 
   * {
@@ -149,7 +148,7 @@
   }
 
   .glass-effect {
-    @apply backdrop-blur-md bg-white/80 border border-white/20;
+    @apply backdrop-blur-md bg-white/80 dark:bg-black/50 border border-white/20;
   }
 
   .gradient-primary {
