@@ -13,7 +13,7 @@ interface ProductModalProps {
 export default function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
   const handleWhatsApp = () => {
     const message = encodeURIComponent(
-      `Olá, gostaria de informações sobre o produto: ${product.nome} - Categoria: ${product.categoria}.`
+      `Olá, bom dia! Gostaria de informações sobre o produto ${product.nome} da categoria ${product.categoria}.😄☺️`
     );
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
     onClose();
