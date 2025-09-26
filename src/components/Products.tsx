@@ -141,8 +141,8 @@ export default function Products() {
                     </CarouselItem>
                   ))}
               </CarouselContent>
-              <CarouselPrevious className="hidden md:flex" />
-              <CarouselNext className="hidden md:flex" />
+              <CarouselPrevious className="md:flex left-2 translate-y-[-100%]" />
+              <CarouselNext className="md:flex right-2 translate-y-[-100%]" />
             </Carousel>
           </TabsContent>
 
@@ -208,12 +208,12 @@ export default function Products() {
                     </CarouselItem>
                   ))}
               </CarouselContent>
-              <CarouselPrevious className="hidden md:flex" />
-              <CarouselNext className="hidden md:flex" />
+              <CarouselPrevious className="md:flex left-2 translate-y-[-100%]" />
+              <CarouselNext className="md:flex right-2 translate-y-[-100%]" />
             </Carousel>
           </TabsContent>
 
-          {/* fdssdf */}
+          {/* Pele */}
           <TabsContent value="Pele" className="mt-8">
             <Carousel
               opts={{
@@ -276,8 +276,8 @@ export default function Products() {
                     </CarouselItem>
                   ))}
               </CarouselContent>
-              <CarouselPrevious className="hidden md:flex" />
-              <CarouselNext className="hidden md:flex" />
+              <CarouselPrevious className="md:flex left-2 translate-y-[-100%]" />
+              <CarouselNext className="md:flex right-2 translate-y-[-100%]" />
             </Carousel>
           </TabsContent>
         </Tabs>

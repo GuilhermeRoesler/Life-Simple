@@ -14,13 +14,11 @@ export default function Hero() {
     document.querySelector('#produtos')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const backgroundImageUrl = 'https://media.revistavanityfair.es/photos/66a35335ccce6c5c77cb7e3e/16:9/w_2560%2Cc_limit/GettyImages-1404722226.jpg';
-
   return (
-    <section 
-      id="home" 
+    <section
+      id="home"
       className="relative pt-20 lg:pt-24 min-h-screen flex items-center justify-center px-8 bg-cover bg-center text-white"
-      style={{ backgroundImage: `url('${backgroundImageUrl}')` }}
+      style={{ backgroundImage: `url('https://media.revistavanityfair.es/photos/66a35335ccce6c5c77cb7e3e/16:9/w_2560%2Cc_limit/GettyImages-1404722226.jpg')` }}
     >
       {/* Dark overlay for text readability */}
       <div className="absolute inset-0 bg-black/60 z-0"></div>
@@ -31,11 +29,11 @@ export default function Hero() {
           {/* Centered Content */}
           <div className="animate-fade-in text-center flex flex-col items-center">
 
-          <h1 className="text-5xl lg:text-7xl xl:text-8xl font-bold mb-8 leading-tight">
-            <span style={{fontFamily: 'Inter', fontWeight: '350'}}>Life Simple Phar.</span>
-          </h1>
+            <h1 className="text-5xl lg:text-7xl xl:text-8xl font-bold mb-8 leading-tight">
+              <span style={{ fontFamily: 'Inter', fontWeight: '350' }}>Life Simple Phar.</span>
+            </h1>
 
-            <p className="text-base lg:text-lg text-gray-300 mb-8 leading-relaxed max-w-4xl" style={{fontFamily: 'Inter', fontWeight: '400'}}>
+            <p className="text-base lg:text-lg text-gray-300 mb-8 leading-relaxed max-w-4xl" style={{ fontFamily: 'Inter', fontWeight: '400' }}>
               Cuidar da sua saúde é a nossa prioridade.
               Aqui você encontra medicamentos, produtos de bem-estar e cuidados pessoais com atendimento atencioso e de confiança.
               Nosso compromisso é oferecer praticidade, orientação segura e qualidade em cada detalhe.

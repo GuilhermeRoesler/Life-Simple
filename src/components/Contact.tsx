@@ -31,15 +31,29 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      // Placeholder API call
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData)
-      // });
+      // Criar mensagem para WhatsApp
+      const mensagemWhatsApp = `Olá! Vim através do site da Life Simple!
 
-      if (true) {
-        setSubmitMessage('Mensagem enviada com sucesso! Nossa equipe responderá em até 24h úteis.');
+*Nome:* ${formData.nome},
+*Email:*  ${formData.email}
+*Mensagem:* ${formData.mensagem}
+
+Aguardo retorno. Obrigado(a)! ✨`;
+
+      // Número do WhatsApp (remover espaços e caracteres especiais)
+      const numeroWhatsApp = '5551999999999'; // (51) 99999-9999
+
+      // URL do WhatsApp
+      const whatsappURL = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagemWhatsApp)}`;
+
+      // Abrir WhatsApp
+      window.open(whatsappURL, '_blank');
+
+      // Mostrar mensagem de sucesso
+      setSubmitMessage('Redirecionando para o WhatsApp...');
+
+      // Limpar formulário após 2 segundos
+      setTimeout(() => {
         setFormData({
           nome: '',
           email: '',
@@ -47,15 +61,14 @@ export default function Contact() {
           mensagem: '',
           consentimento: false
         });
-      } else {
-        throw new Error('Failed to send message');
-      }
+      }, 2000);
+
     } catch (error) {
-      setSubmitMessage('Erro ao enviar mensagem. Por favor, tente novamente ou entre em contato via WhatsApp.');
+      setSubmitMessage('Erro ao processar. Por favor, tente novamente.');
       console.error('Contact form error:', error);
     } finally {
       setIsSubmitting(false);
-      setTimeout(() => setSubmitMessage(''), 5000);
+      setTimeout(() => setSubmitMessage(''), 8000);
     }
   };
 
@@ -142,8 +155,8 @@ export default function Contact() {
                   </div>
 
                   {submitMessage && (
-                    <div className={`p-3 rounded-lg text-sm ${submitMessage.includes('sucesso')
-                      ? 'bg-success/10 text-success'
+                    <div className={`p-3 rounded-lg text-sm ${submitMessage.includes('Redirecionando')
+                      ? 'bg-green-500/10 text-green-600 border border-green-200'
                       : 'bg-destructive/10 text-destructive'
                       }`}>
                       {submitMessage}
@@ -156,7 +169,7 @@ export default function Contact() {
                     className="w-full gradient-primary hover:opacity-90"
                   >
                     <Send className="mr-2 h-4 w-4" />
-                    {isSubmitting ? 'Enviando...' : 'Enviar Mensagem'}
+                    {isSubmitting ? 'Abrindo WhatsApp...' : 'Enviar via WhatsApp'}
                   </Button>
                 </form>
               </CardContent>

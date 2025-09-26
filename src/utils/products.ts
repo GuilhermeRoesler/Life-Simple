@@ -93,16 +93,7 @@ export const initialProducts: Product[] = [
     imagem: "img/shake-proteico.png"
   },
 
-  // Academia - 10 produtos
-  {
-    id: "m-acad-01",
-    nome: "Amino Max",
-    categoria: "Academia",
-    descricao_curta: "Aminoácidos essenciais para recuperação.",
-    descricao_longa: "Blend completo de BCAA e EAAs para recuperação muscular pós-treino. Leucina, isoleucina e valina.",
-    preco: "89.90",
-    imagem: "img/amino-max.png"
-  },
+  // Academia - 9 produtos
   {
     id: "m-acad-02",
     nome: "Creatina Pura",
@@ -165,15 +156,6 @@ export const initialProducts: Product[] = [
     descricao_longa: "Whey protein isolado com 90% de proteína. Rápida absorção e baixo teor de carboidratos.",
     preco: "139.90",
     imagem: "img/whey-isolado.png"
-  },
-  {
-    id: "m-acad-09",
-    nome: "Joint Support",
-    categoria: "Academia",
-    descricao_curta: "Proteção articular completa.",
-    descricao_longa: "Glucosamina, condroitina e MSM para saúde das articulações. Colágeno tipo II.",
-    preco: "84.90",
-    imagem: "img/suporte-conjunto.png"
   },
   {
     id: "m-acad-10",
@@ -351,7 +333,7 @@ export const initialProducts: Product[] = [
   }
 ];
 
-export const WHATSAPP_NUMBER = '5551989354834'; // Replace with actual number
+export const WHATSAPP_NUMBER = '5551999999999'; // Replace with actual number
 export const INSTAGRAM_URL = 'https://instagram.com/farmaciamanipulacao'; // Replace with actual URL
 export const CHATBOT_API_URL = '/api/chatbot'; // Replace with actual API URL
 export const CHATBOT_API_KEY = 'YOUR_API_KEY'; // Replace with actual API key

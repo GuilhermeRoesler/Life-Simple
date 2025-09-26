@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Instagram, MessageCircle, Menu, X } from 'lucide-react';
 import { WHATSAPP_NUMBER, INSTAGRAM_URL } from '@/utils/products';
 import { Button } from '@/components/ui/button';
-import logo from '@/assets/logo.jpeg';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,12 +33,12 @@ export default function Header() {
   return (
     <header className={`absolute top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300'
       }`}>
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+      <div className="container mx-auto px-0">
+        <div className="flex items-center justify-between h-16 lg:h-20 px-4">
           {/* Logo */}
           <div className="flex items-center">
             <a href="#home" onClick={(e) => { e.preventDefault(); handleNavClick('#home'); }} className="flex items-center space-x-3">
-              <img src={"/icon.png"} alt="Life Simple" className="h-20 lg:h-20 w-auto" />
+              {/* <img src={"/icon.png"} alt="Life Simple" className="h-20 lg:h-20 w-auto" style={{ height: '8rem' }} /> */}
               <span className="text-xl lg:text-2xl text-white" style={{ fontFamily: 'Inter', fontWeight: '300' }}>Life Simple</span>
             </a>
           </div>
@@ -85,7 +84,7 @@ export default function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="lg:hidden"
+              className="lg:hidden bg-primary text-white"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -95,7 +94,7 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-border animate-slide-up">
+          <div className="lg:hidden py-4 border-t border-border animate-slide-up px-4 bg-white">
             <nav className="flex flex-col space-y-3">
               {navItems.map((item) => (
                 <a
