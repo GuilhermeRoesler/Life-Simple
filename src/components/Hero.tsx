@@ -1,9 +1,8 @@
 import { ArrowRight, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { WHATSAPP_NUMBER } from '@/utils/products';
 
 export default function Hero() {
-  // Define the WhatsApp number directly in the component
-  const WHATSAPP_NUMBER = '5551999999999'; // Replace with the actual number
 
   const handleWhatsApp = () => {
     const message = encodeURIComponent('Olá! Gostaria de informações sobre produtos manipulados.');

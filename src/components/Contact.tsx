@@ -7,6 +7,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
 import { ContactForm } from '@/types';
+import { WHATSAPP_NUMBER } from '@/utils/products';
 
 export default function Contact() {
   const [formData, setFormData] = useState<ContactForm>({
@@ -40,11 +41,8 @@ export default function Contact() {
 
 Aguardo retorno. Obrigado(a)! ✨`;
 
-      // Número do WhatsApp (remover espaços e caracteres especiais)
-      const numeroWhatsApp = '5551999999999'; // (51) 99999-9999
-
       // URL do WhatsApp
-      const whatsappURL = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagemWhatsApp)}`;
+      const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensagemWhatsApp)}`;
 
       // Abrir WhatsApp
       window.open(whatsappURL, '_blank');
@@ -123,7 +121,7 @@ Aguardo retorno. Obrigado(a)! ✨`;
                       type="tel"
                       value={formData.telefone}
                       onChange={(e) => setFormData({ ...formData, telefone: e.target.value })}
-                      placeholder="(51) 99999-9999"
+                      placeholder="(51) 98935-4834"
                       className='border-black border-gradient-primary mt-1'
                     />
                   </div>
@@ -223,9 +221,9 @@ Aguardo retorno. Obrigado(a)! ✨`;
                   <div>
                     <h3 className="font-semibold mb-1">Telefones</h3>
                     <p className="text-muted-foreground">
-                      WhatsApp: (51) 99999-9999<br />
-                      Telefone: (51) 3333-3333<br />
-                      E-mail: lifesimple@gmail.com
+                      WhatsApp: (51) 98935-4834<br />
+                      Telefone: (51) 8935-4834<br />
+                      E-mail: atendimento.lifesimple@gmail.com
                     </p>
                   </div>
                 </div>

@@ -333,7 +333,7 @@ export const initialProducts: Product[] = [
   }
 ];
 
-export const WHATSAPP_NUMBER = '5551999999999'; // Replace with actual number
-export const INSTAGRAM_URL = 'https://instagram.com/farmaciamanipulacao'; // Replace with actual URL
+export const WHATSAPP_NUMBER = '5551989354834'; // Replace with actual number
+export const INSTAGRAM_URL = 'https://instagram.com/lifesimplepharma'; // Replace with actual URL
 export const CHATBOT_API_URL = '/api/chatbot'; // Replace with actual API URL
 export const CHATBOT_API_KEY = 'YOUR_API_KEY'; // Replace with actual API key

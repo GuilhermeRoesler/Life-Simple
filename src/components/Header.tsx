@@ -38,7 +38,7 @@ export default function Header() {
           {/* Logo */}
           <div className="flex items-center">
             <a href="#home" onClick={(e) => { e.preventDefault(); handleNavClick('#home'); }} className="flex items-center space-x-3">
-              {/* <img src={"/icon.png"} alt="Life Simple" className="h-20 lg:h-20 w-auto" style={{ height: '8rem' }} /> */}
+              <img src={"/icon2.png"} alt="Life Simple" className="h-20 lg:h-20 w-auto" style={{ height: '2rem' }} />
               <span className="text-xl lg:text-2xl text-white" style={{ fontFamily: 'Inter', fontWeight: '300' }}>Life Simple</span>
             </a>
           </div>

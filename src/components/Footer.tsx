@@ -63,16 +63,16 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:underline opacity-90 hover:opacity-100"
                 >
-                  (51) 99999-9999
+                  (51) 98935-4834
                 </a>
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="w-4 h-4" />
                 <a 
-                  href="mailto:lifesimple@gmail.com"
+                  href="mailto:atendimento.lifesimple@gmail.com"
                   className="hover:underline opacity-90 hover:opacity-100"
                 >
-                 lifesimple@gmail.com
+                 atendimento.lifesimple@gmail.com
                 </a>
               </li>
             </ul>
