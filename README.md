@@ -1,7 +1,5 @@
 # One-Page para Farmácia de Manipulação
 
-Aqui está o conteúdo para o arquivo `README.md`. Ele foi criado para ser bonito, informativo e fácil de usar, tanto para o desenvolvedor quanto para o cliente final.
-
 <div align="center">
   <img src="https://emojicdn.elk.sh/🧪?style=google" alt="Tubo de Ensaio" width="100"/>
   <h1>One-Page: Farmácia de Manipulação</h1>
@@ -44,7 +42,7 @@ Este projeto foi construído com foco na experiência do usuário e na facilidad
 - **♿ Acessibilidade:** Componentes desenvolvidos com boas práticas de acessibilidade (atributos `aria-*`, labels, contraste de cores).
 - **🚀 Otimização:** Animações suaves, lazy loading de imagens para melhor performance e meta tags básicas para SEO.
 
----
+![](public/demo.png)
 
 ## 🚀 Tecnologias Utilizadas
 
@@ -123,12 +121,10 @@ export const CONFIG = {
 Para facilitar a vida do cliente, os produtos podem ser editados diretamente pelo navegador, sem precisar mexer no código.
 
 1.  **Ativando o Modo Admin:**
-
     - Acesse o site e adicione `?admin=true` ao final da URL. Ex: `http://localhost:5173/?admin=true`.
     - Um botão "Editar" aparecerá nos cards de produto.
 
 2.  **Editando um Produto:**
-
     - Clique em "Editar" no produto desejado.
     - Um painel lateral se abrirá com todos os campos do produto.
     - Altere as informações e clique em "Salvar". As mudanças são salvas no `localStorage` do seu navegador.
@@ -193,11 +189,9 @@ O projeto é organizado de forma modular para facilitar a manutenção e escalab
 Este projeto é um protótipo funcional completo. Os próximos passos envolvem a integração com serviços de backend:
 
 1.  **Backend - Formulário de Contato:**
-
     - Desenvolver o endpoint `/api/contact` que recebe os dados do formulário e os envia por e-mail ou salva em um banco de dados.
 
 2.  **Backend - Gerenciamento de Produtos:**
-
     - Substituir o `localStorage` por uma API real para carregar e gerenciar os produtos.
     - O "Modo Admin" pode ser adaptado para fazer requisições `PUT`/`POST`/`DELETE` para esta API.
 

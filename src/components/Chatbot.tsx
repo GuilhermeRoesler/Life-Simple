@@ -140,7 +140,7 @@ export default function Chatbot() {
         throw new Error('Chave de API do Gemini não configurada.');
       }
 
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${GEMINI_API_KEY}`;
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
 
       const systemPrompt = `
       Você é o assistente virtual da farmácia de manipulados Life Simple, treinado para auxiliar clientes com dúvidas comuns. Seu tom de voz deve ser sempre educado, atencioso, assertivo e claro, evitando respostas frias, impessoais ou técnicas demais. Use linguagem simples e acessível, trazendo emojis à conversa.
