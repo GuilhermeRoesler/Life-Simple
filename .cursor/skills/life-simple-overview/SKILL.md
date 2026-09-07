@@ -59,7 +59,7 @@ public/         # assets, robots, sitemap
 | `npm test` | Vitest |
 | `npm run preview` | Preview + proxy |
 | `npm run start` | Serve `dist/` + API (produção local; Node 22+) |
-| `npm run optimize:images` | Gera WebP otimizados em `public/` |
+| `npm run optimize:images` | Gera WebP/AVIF + variantes 400w e `og-cover.jpg` |
 
 ## Env (regras de ouro)
 

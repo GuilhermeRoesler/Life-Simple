@@ -39,6 +39,8 @@ UI e server (system prompt do chat) **consomem** esses módulos — não copiar 
 
 1. Incluir objeto em `initialProducts` na categoria correta
 2. Colocar imagem WebP em `public/img/` (rodar `npm run optimize:images` se a fonte for PNG/JPG) e apontar `imagem`
+   - O script gera o canônico (`slim.webp`, ~800w) e a variante `slim-400.webp` para srcSet
+   - Share/OG: `public/og-cover.jpg` (1200×630) — regenerado pelo mesmo script
 3. Garantir que `productNames` (export derivado) continue coerente — o chat lista produtos
 4. Tom: apoio/bem-estar; **sem** alegações clínicas absolutas; reforçar orientação profissional quando fizer sentido
 5. `preco` como string numérica; formatação na UI via `lib/format`
@@ -72,6 +74,7 @@ Mensagens pré-preenchidas do WhatsApp: montar via `openWhatsApp` / `buildWhatsA
 
 - Atualizar `public/sitemap.xml` e Sitemap em `public/robots.txt` com domínio real (`VITE_SITE_URL`)
 - OG/canonical dependem de `VITE_SITE_URL` no HTML/build — sem barra final
+- Share image: `public/og-cover.jpg` (1200×630), regenerada por `npm run optimize:images`
 
 ## Tom de voz
 

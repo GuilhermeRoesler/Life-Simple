@@ -12,6 +12,8 @@ export default function Hero() {
     document.querySelector('#produtos')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const heroSmAvif = publicUrl('/background-hero-sm.avif');
+  const heroLgAvif = publicUrl('/background-hero.avif');
   const heroSm = publicUrl('/background-hero-sm.webp');
   const heroLg = publicUrl('/background-hero.webp');
   const heroFallback = publicUrl('/background-hero.jpg');
@@ -23,6 +25,11 @@ export default function Hero() {
     >
       <picture>
         <source
+          type="image/avif"
+          srcSet={`${heroSmAvif} 960w, ${heroLgAvif} 1920w`}
+          sizes="100vw"
+        />
+        <source
           type="image/webp"
           srcSet={`${heroSm} 960w, ${heroLg} 1920w`}
           sizes="100vw"
@@ -33,6 +40,7 @@ export default function Hero() {
           width={1920}
           height={1080}
           sizes="100vw"
+          loading="eager"
           fetchPriority="high"
           decoding="async"
           className="absolute inset-0 h-full w-full object-cover object-center animate-ken-burns will-change-transform"

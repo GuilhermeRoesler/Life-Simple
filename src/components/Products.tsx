@@ -77,6 +77,7 @@ function ProductCarousel({
                   alt={product.nome}
                   width={320}
                   height={240}
+                  sizes="(max-width: 640px) 42vw, (max-width: 1024px) 28vw, 200px"
                   className="absolute inset-0 m-auto h-[72%] w-auto max-w-[62%] object-contain drop-shadow-[0_12px_22px_rgba(20,50,45,0.2)] transition-transform duration-700 ease-out group-hover:scale-105 group-hover:-translate-y-0.5"
                 />
 

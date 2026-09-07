@@ -67,7 +67,8 @@ Ordem fixa:
 
 - Mobile-first; breakpoints Tailwind padrão
 - Imagens decorativas: `aria-hidden` quando aplicável
-- Produtos/hero: WebP otimizado; usar `OptimizedImage` (lazy) ou `priority` no LCP; assets via `publicUrl`
+- Produtos/hero: WebP (+ AVIF no hero); usar `OptimizedImage` (lazy + srcSet 400/800) ou `priority` no LCP; assets via `publicUrl`
+- OG/Twitter: `og-cover.jpg` 1200×630 (não usar `icon2.png` como share image)
 - Botões/links com texto claro (não só ícone sem label)
 
 ## O que evitar

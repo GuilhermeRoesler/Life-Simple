@@ -65,6 +65,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
               alt={product.nome}
               width={480}
               height={480}
+              sizes="(max-width: 768px) 85vw, 420px"
               className="relative z-0 mx-auto max-h-72 w-auto object-contain drop-shadow-[0_18px_30px_rgba(20,50,45,0.22)]"
             />
           </div>

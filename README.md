@@ -2,7 +2,7 @@
 
 Landing page one-page responsiva para farmácia de manipulação, com catálogo, FAQ, páginas legais (LGPD), chatbot (Gemini via proxy + Firebase) e conversão via WhatsApp.
 
-![](docs/screenshots/demo.png)
+![](public/demo.webp)
 
 ## Funcionalidades
 
@@ -88,7 +88,7 @@ plugins/            # Plugin Vite /api/chat
 | `npm run start` | Serve `dist/` + API (produção local; Node 22+) |
 | `npm run lint` | ESLint |
 | `npm test` | Vitest |
-| `npm run optimize:images` | Gera WebP otimizados em `public/` |
+| `npm run optimize:images` | Gera WebP/AVIF, variantes 400w e `og-cover.jpg` |
 
 ## CI/CD (GitHub Actions)
 
